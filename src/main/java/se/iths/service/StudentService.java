@@ -5,6 +5,8 @@ import se.iths.entity.Student;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Transactional
@@ -37,7 +39,13 @@ public class StudentService {
 
     public void deleteStudent(Long id){
         Student foundStudent = findStudentById(id);
-        entityManager.remove(foundStudent);
+        if(foundStudent == null){
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Item with ID " + id + " was not found in database.").build());
+        } else{
+            entityManager.remove(foundStudent);
+        }
+
     }
 
 

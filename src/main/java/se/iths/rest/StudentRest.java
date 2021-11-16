@@ -6,6 +6,7 @@ import se.iths.service.StudentService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 @Path("student")
@@ -16,30 +17,49 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createNewStudent(Student student){
+    public Response createNewStudent(Student student) throws SQLException {
         studentService.createNewStudent(student);
         return Response.ok(student).build();
     }
 
-    @Path("")
+    @Path("{id}")
     @PUT
-    public Response updateStudent(Student student){
-        studentService.updateStudent(student);
-        return Response.ok(student).build();
+    public Response updateStudent(@PathParam("id") Long id) {
+        Student foundStudent = studentService.findStudentById(id);
+        if (foundStudent == null) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Student with ID " + id + " was not found in database.")
+                    .build());
+
+        } else {
+            studentService.updateStudent(foundStudent);
+            return Response.ok(foundStudent).build();
+        }
     }
 
     @Path("{id}")
     @GET
-    public Response getStudent(@PathParam("id") Long id){
+    public Response getStudent(@PathParam("id") Long id ) {
         Student foundStudent = studentService.findStudentById(id);
-        return Response.ok(foundStudent).build() ;
+        if (foundStudent == null) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Student with ID " + id + " was not found in database.").build());
+        } else {
+            return Response.ok(foundStudent).build();
+        }
     }
 
     @Path("{lastname}")
     @GET
-    public Response getStudent(@QueryParam("lastname") String lastname){
+    public Response getStudent(@QueryParam("lastname") String lastname) {
         List<Student> foundStudents = studentService.findStudentsByLastname(lastname);
-        return Response.ok(foundStudents).build() ;
+
+        if (foundStudents.isEmpty()) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Item with ID " + lastname + " was not found in database.").build());
+        } else {
+            return Response.ok(foundStudents).build();
+        }
     }
 
     @Path("")
@@ -53,16 +73,8 @@ public class StudentRest {
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id){
         studentService.deleteStudent(id);
-        return Response.ok().build();
+        return Response.accepted().build();
     }
-
-
-
-
-
-
-
-
 
 
 }
