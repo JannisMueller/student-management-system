@@ -7,14 +7,19 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class EntityNotFoundMapper implements ExceptionMapper<EntityNotFoundException> {
+public class ApiExceptionHandler implements ExceptionMapper<ApiExceptions> {
+
+
     @Override
-    public Response toResponse(EntityNotFoundException e) {
+    public Response toResponse(ApiExceptions apiExceptions) {
         return Response.status(
-                Response.Status.NOT_FOUND)
-                .type(MediaType.APPLICATION_JSON).entity("Error-Student not in Database")
+                        Response.Status.NOT_FOUND)
+                .type(MediaType.APPLICATION_JSON).entity(apiExceptions.getMessage())
                 .build();
     }
+
+
+
 
 
 }

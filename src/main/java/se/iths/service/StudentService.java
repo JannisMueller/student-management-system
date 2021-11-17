@@ -1,13 +1,12 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.rest.ApiExceptions;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+
 import java.util.List;
 
 @Transactional
@@ -42,9 +41,9 @@ public class StudentService {
 
     public void deleteStudent(Long id){
         Student foundStudent = findStudentById(id);
-        if(foundStudent == null){
-            throw new EntityNotFoundException();
-        } else{
+        if (foundStudent == null) {
+            throw new ApiExceptions("Student with ID " + id + "not in Database");
+        } else {
             entityManager.remove(foundStudent);
         }
 

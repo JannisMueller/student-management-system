@@ -21,15 +21,24 @@ public class StudentRest {
     @Path("")
     @POST
     public Response createNewStudent(Student student) {
-        studentService.createNewStudent(student);
-        return Response.ok(student).build();
+        try {
+            studentService.createNewStudent(student);
+            return Response.ok(student).build();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     @Path("")
     @PUT
     public Response updateStudent(Student student) {
-        studentService.updateStudent(student);
+        if (student == null) {
+            throw new ApiExceptions("Student not found!");
+        } else {
+            studentService.updateStudent(student);
             return Response.ok(student).build();
+        }
     }
 
     @Path("{id}")
@@ -37,7 +46,7 @@ public class StudentRest {
     public Response getStudent(@PathParam("id") Long id ) {
         Student foundStudent = studentService.findStudentById(id);
         if (foundStudent == null) {
-            throw new EntityNotFoundException();
+            throw new ApiExceptions("Student with ID " + id + "not in Database");
         } else {
             return Response.ok(foundStudent).build();
         }
@@ -48,8 +57,7 @@ public class StudentRest {
     public Response getStudent(@QueryParam("lastName") String lastName) {
         List<Student> foundStudents = studentService.findStudentsByLastname(lastName);
         if (foundStudents.isEmpty()) {
-            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON)
-                    .entity(" No students with last name " + lastName + " were not found in database.").build());
+            throw new ApiExceptions("No students with last name" + lastName + " were not found in database.");
         } else {
             return Response.ok(foundStudents).build();
         }
@@ -59,16 +67,18 @@ public class StudentRest {
     @GET
     public Response getAllStudents(){
         List<Student> foundStudents = studentService.getAllStudents();
-
+        if(foundStudents.isEmpty()){
+            throw new ApiExceptions("No students are found in Database");
+        } else {
         return Response.ok(foundStudents).build();
+    }
     }
 
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id){
-        studentService.deleteStudent(id);
-        return Response.accepted().build();
+            studentService.deleteStudent(id);
+            return Response.accepted().build();
+        }
     }
 
-
-}
