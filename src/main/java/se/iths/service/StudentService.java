@@ -1,7 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
-import se.iths.exceptionHandling.ApiNotFoundExceptions;
+import se.iths.exceptionhandling.ApiNotFoundExceptions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

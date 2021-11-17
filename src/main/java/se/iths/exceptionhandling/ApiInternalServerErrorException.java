@@ -1,14 +1,13 @@
-package se.iths.exceptionHandling;
+package se.iths.exceptionhandling;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.Serializable;
 
-public class ApiNotFoundExceptions extends WebApplicationException
+public class ApiInternalServerErrorException extends WebApplicationException
         implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public ApiNotFoundExceptions(String msg)   {
+    public ApiInternalServerErrorException(String msg) {
         super(msg);
     }
-
 }
