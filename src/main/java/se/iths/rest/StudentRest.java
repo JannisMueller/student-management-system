@@ -4,7 +4,6 @@ import se.iths.entity.Student;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
-import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,17 +23,16 @@ public class StudentRest {
         try {
             studentService.createNewStudent(student);
             return Response.ok(student).build();
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            throw new ApiInternalServerErrorException("Oops...Something went wrong");
         }
-        return null;
     }
 
     @Path("")
     @PUT
     public Response updateStudent(Student student) {
         if (student == null) {
-            throw new ApiExceptions("Student not found!");
+            throw new ApiNotFoundExceptions("Student not found!");
         } else {
             studentService.updateStudent(student);
             return Response.ok(student).build();
@@ -46,7 +44,7 @@ public class StudentRest {
     public Response getStudent(@PathParam("id") Long id ) {
         Student foundStudent = studentService.findStudentById(id);
         if (foundStudent == null) {
-            throw new ApiExceptions("Student with ID " + id + "not in Database");
+            throw new ApiNotFoundExceptions("Student with ID " + id + " not in Database");
         } else {
             return Response.ok(foundStudent).build();
         }
@@ -57,7 +55,7 @@ public class StudentRest {
     public Response getStudent(@QueryParam("lastName") String lastName) {
         List<Student> foundStudents = studentService.findStudentsByLastname(lastName);
         if (foundStudents.isEmpty()) {
-            throw new ApiExceptions("No students with last name" + lastName + " were not found in database.");
+            throw new ApiNotFoundExceptions("No students with last name" + lastName + " were not found in database.");
         } else {
             return Response.ok(foundStudents).build();
         }
@@ -68,7 +66,7 @@ public class StudentRest {
     public Response getAllStudents(){
         List<Student> foundStudents = studentService.getAllStudents();
         if(foundStudents.isEmpty()){
-            throw new ApiExceptions("No students are found in Database");
+            throw new ApiNotFoundExceptions("No students are found in Database");
         } else {
         return Response.ok(foundStudents).build();
     }

@@ -1,7 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
-import se.iths.rest.ApiExceptions;
+import se.iths.rest.ApiNotFoundExceptions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,7 +42,7 @@ public class StudentService {
     public void deleteStudent(Long id){
         Student foundStudent = findStudentById(id);
         if (foundStudent == null) {
-            throw new ApiExceptions("Student with ID " + id + "not in Database");
+            throw new ApiNotFoundExceptions("Student with ID " + id + "not in Database");
         } else {
             entityManager.remove(foundStudent);
         }
