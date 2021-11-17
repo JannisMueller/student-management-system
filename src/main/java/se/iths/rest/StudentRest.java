@@ -48,7 +48,9 @@ public class StudentRest {
         if (foundStudent == null) {
             throw new ApiNotFoundExceptions("Student with ID " + id + " not in Database");
         } else {
-            return Response.ok(foundStudent).build();
+            return Response.status(Response.Status.FOUND)
+            .entity(foundStudent)
+            .build();
         }
     }
 
@@ -59,7 +61,9 @@ public class StudentRest {
         if (foundStudents.isEmpty()) {
             throw new ApiNotFoundExceptions("No students with last name" + lastName + " were not found in database.");
         } else {
-            return Response.ok(foundStudents).build();
+            return Response.status(Response.Status.FOUND)
+                    .entity(foundStudents)
+                    .build();
         }
     }
 
@@ -70,7 +74,9 @@ public class StudentRest {
         if(foundStudents.isEmpty()){
             throw new ApiNotFoundExceptions("No students are found in Database");
         } else {
-        return Response.ok(foundStudents).build();
+        return Response.status(Response.Status.FOUND)
+                .entity(foundStudents)
+                .build();
     }
     }
 
@@ -78,7 +84,7 @@ public class StudentRest {
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id){
             studentService.deleteStudent(id);
-            return Response.accepted().build();
+            return Response.ok().build();
         }
     }
 
