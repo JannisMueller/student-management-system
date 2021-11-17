@@ -1,4 +1,4 @@
-package se.iths.rest;
+package se.iths.exceptionHandling;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.Serializable;

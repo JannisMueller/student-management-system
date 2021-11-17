@@ -1,4 +1,4 @@
-package se.iths.rest;
+package se.iths.exceptionHandling;
 
 import javax.ejb.Singleton;
 import javax.ws.rs.core.MediaType;
