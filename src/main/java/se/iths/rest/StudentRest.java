@@ -1,8 +1,8 @@
 package se.iths.rest;
 
 import se.iths.entity.Student;
-import se.iths.exceptionhandling.ApiInternalServerErrorException;
-import se.iths.exceptionhandling.ApiNotFoundExceptions;
+import se.iths.exceptionHandling.ApiInternalServerErrorException;
+import se.iths.exceptionHandling.ApiNotFoundExceptions;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;

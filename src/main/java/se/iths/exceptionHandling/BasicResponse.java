@@ -1,4 +1,4 @@
-package se.iths.exceptionhandling;
+package se.iths.exceptionHandling;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
