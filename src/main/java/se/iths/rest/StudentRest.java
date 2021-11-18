@@ -53,7 +53,7 @@ public class StudentRest {
     public Response getStudent(@QueryParam("lastName") String lastName) {
         List<Student> foundStudents = studentService.findStudentsByLastname(lastName);
         if (foundStudents.isEmpty()) {
-            throw new ApiNotFoundExceptions("No students with last name " + lastName + " were not found in database.");
+            throw new ApiNotFoundExceptions("No students with last name " + lastName + " were found in database.");
         } else {
             return Response.ok(foundStudents).build();
         }
