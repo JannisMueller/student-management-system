@@ -19,8 +19,13 @@ public class StudentService {
         entityManager.persist(student);
     }
 
-    public void updateStudent (Student student){
-       entityManager.merge(student);
+    public void updateStudent (Student student, Long id) {
+        Student foundStudent = findStudentById(id);
+        if (foundStudent != null) {
+            entityManager.merge(student);
+        } else {
+            throw new ApiNotFoundExceptions("Student with ID " + id + " not in Database");
+        }
     }
 
     public Student findStudentById(Long id){

@@ -30,15 +30,11 @@ public class StudentRest {
         }
     }
 
-    @Path("")
+    @Path("{id}")
     @PUT
-    public Response updateStudent(Student student) {
-        if (student == null) {
-            throw new ApiNotFoundExceptions("Student not found!");
-        } else {
-            studentService.updateStudent(student);
+    public Response updateStudent(@PathParam("id") Long id, Student student) {
+            studentService.updateStudent(student, id);
             return Response.ok(student).build();
-        }
     }
 
     @Path("{id}")
