@@ -14,7 +14,7 @@
 
 - [x] ● Felhantering ska finnas för varje CRUD-metod, och felmeddelande ska returneras i
 
-​	JSON-format **Kommentar: felhantering för Delete görs i studentservice metoden**
+​	JSON-format **Kommentar: felhantering för Delete och Put görs i studentservice metoden**
 
 
 
