@@ -48,9 +48,7 @@ public class StudentRest {
         if (foundStudent == null) {
             throw new ApiNotFoundExceptions("Student with ID " + id + " not in Database");
         } else {
-            return Response.status(Response.Status.FOUND)
-            .entity(foundStudent)
-            .build();
+            return Response.ok(foundStudent).build();
         }
     }
 
@@ -59,11 +57,9 @@ public class StudentRest {
     public Response getStudent(@QueryParam("lastName") String lastName) {
         List<Student> foundStudents = studentService.findStudentsByLastname(lastName);
         if (foundStudents.isEmpty()) {
-            throw new ApiNotFoundExceptions("No students with last name" + lastName + " were not found in database.");
+            throw new ApiNotFoundExceptions("No students with last name " + lastName + " were not found in database.");
         } else {
-            return Response.status(Response.Status.FOUND)
-                    .entity(foundStudents)
-                    .build();
+            return Response.ok(foundStudents).build();
         }
     }
 
@@ -74,9 +70,7 @@ public class StudentRest {
         if(foundStudents.isEmpty()){
             throw new ApiNotFoundExceptions("No students are found in Database");
         } else {
-        return Response.status(Response.Status.FOUND)
-                .entity(foundStudents)
-                .build();
+        return Response.ok(foundStudents).build();
     }
     }
 

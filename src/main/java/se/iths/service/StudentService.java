@@ -42,7 +42,7 @@ public class StudentService {
     public void deleteStudent(Long id){
         Student foundStudent = findStudentById(id);
         if (foundStudent == null) {
-            throw new ApiNotFoundExceptions("Student with ID " + id + "not in Database");
+            throw new ApiNotFoundExceptions("Student with ID " + id + " not in Database");
         } else {
             entityManager.remove(foundStudent);
         }
