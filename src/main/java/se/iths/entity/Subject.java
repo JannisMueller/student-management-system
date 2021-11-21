@@ -19,7 +19,7 @@ public class Subject {
     private Teacher teacher;
     @ManyToOne
     private Student student;
-
+    //To-do bis jetzt wird immer nur ein Student geholt, will aber eine Liste mit Studenten
 
     public Subject() {
     }
