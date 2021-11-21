@@ -9,8 +9,10 @@ import java.util.List;
 
 @Entity
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "studentId")
     private Long id;
     @NotEmpty
     private String firstName;
@@ -20,7 +22,7 @@ public class Student {
     private String email;
     private String phoneNumber;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Subject> subjectList = new ArrayList<>();
+    private List <Subject> subjects = new ArrayList<>();
 
     public Student() {
     }
@@ -33,18 +35,17 @@ public class Student {
     }
 
     public void addSubject(Subject subject){
-        subjectList.add(subject);
+        subjects.add(subject);
         subject.setStudent(this);
     }
+    @JsonbTransient
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
 
     public Long getId() {
         return id;
-    }
-
-
-    @JsonbTransient
-    public List<Subject> getSubjectList() {
-        return subjectList;
     }
 
     public void setId(Long id) {
