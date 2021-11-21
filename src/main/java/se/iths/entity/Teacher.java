@@ -1,16 +1,16 @@
 package se.iths.entity;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
-public class Student {
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long teacherId;
     @NotEmpty
     private String firstName;
     @NotEmpty
@@ -18,24 +18,21 @@ public class Student {
     @NotEmpty
     private String email;
     private String phoneNumber;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Subject> subjectList = new ArrayList<>();
 
     public void addSubject(Subject subject){
         subjectList.add(subject);
-        subject.setStudent(this);
+        subject.setTeacher(this);
     }
 
-    public Long getId() {
-        return id;
+    public Long getTeacherId() {
+        return teacherId;
     }
+
 
     public List<Subject> getSubjectList() {
         return subjectList;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

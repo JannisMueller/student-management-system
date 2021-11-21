@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.entity.Subject;
 import se.iths.exceptionHandling.ApiNotFoundExceptions;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,8 @@ public class StudentService {
     EntityManager entityManager;
 
     public void createNewStudent(Student student){
+        student.addSubject(new Subject("Math"));
+        student.addSubject(new Subject("English"));
         entityManager.persist(student);
     }
 
