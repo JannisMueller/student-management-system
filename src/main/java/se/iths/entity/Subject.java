@@ -4,6 +4,9 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+@NamedQuery(name="subjectEntity.findByName", query= "SELECT i FROM Subject i WHERE i.nameOfSubject = :name")
+@NamedQuery(name = "subjectEntity.findAll", query = "SELECT i from Subject i")
+@NamedQuery(name = "subjectEntity.findAllOrderedByName", query = "SELECT i FROM Subject i ORDER BY i.nameOfSubject")
 @Entity
 public class Subject {
 
@@ -17,6 +20,7 @@ public class Subject {
     @ManyToOne
     private Student student;
 
+
     public Subject() {
     }
 
@@ -24,13 +28,13 @@ public class Subject {
         this.nameOfSubject = nameOfSubject;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     @JsonbTransient
     public Student getStudent() {
         return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @JsonbTransient

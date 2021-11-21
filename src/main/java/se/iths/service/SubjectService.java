@@ -25,7 +25,18 @@ public class SubjectService {
     }
 
     public List<Subject> getAllSubjects(){
-        return entityManager.createQuery("SELECT i from Subject i",Subject.class).getResultList();
+        return entityManager.createNamedQuery("subjectEntity.findAll",Subject.class)
+                .getResultList();
+    }
+
+    public List<Subject> getAllSubjectsSortedByName(){
+        return entityManager.createNamedQuery("subjectEntity.findAllOrderedByName",Subject.class)
+                .getResultList();
+    }
+
+    public List<Subject> getSubjectByName(String name){
+        return entityManager.createQuery("SELECT i FROM Subject i WHERE i.nameOfSubject = :name",Subject.class).setParameter("name", name)
+                .getResultList();
     }
 
 

@@ -25,6 +25,20 @@ public class SubjectRest {
         return Response.ok(subjectList).build();
     }
 
+    @Path("getByName/{name}")
+    @GET
+    public Response getSubjectById(@PathParam("name") String name){
+        List <Subject> foundSubject = subjectService.getSubjectByName(name);
+        return Response.ok(foundSubject).build();
+    }
+
+    @Path("ordered")
+    @GET
+    public Response getAllSubjectsOrderedByName(){
+        List<Subject> subjectListOrderedByName = subjectService.getAllSubjectsSortedByName();
+        return Response.ok(subjectListOrderedByName).build();
+    }
+
     @Path("{id}")
     @GET
     public Response getSubjectById(@PathParam("id")Long id){

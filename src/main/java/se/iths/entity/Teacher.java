@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
@@ -26,11 +27,22 @@ public class Teacher {
         subject.setTeacher(this);
     }
 
+    public Teacher() {
+    }
+
+    public Teacher(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+
+    }
+
     public Long getTeacherId() {
         return teacherId;
     }
 
-
+    @JsonbTransient
     public List<Subject> getSubjectList() {
         return subjectList;
     }
