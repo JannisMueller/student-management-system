@@ -31,7 +31,7 @@ get all subjects ordered (by name):
 /student-management-system/api/v1/subjects/ordered
 
 get subject by name
-/student-management-system/api/v1/s ubjects/getByName/{name}
+/student-management-system/api/v1/subjects/getByName/{name}
 
 ```
 
