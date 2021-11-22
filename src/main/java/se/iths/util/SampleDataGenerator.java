@@ -51,8 +51,8 @@ public class SampleDataGenerator {
 
 
 
-        Subject subject1 = new Subject("Java 1");
-        Subject subject2 = new Subject("Database 2");
+        Subject subject1 = new Subject("Java1");
+        Subject subject2 = new Subject("Database2");
         Subject subject3 = new Subject("Frontend");
         Subject subject4 = new Subject("Backend");
         Subject subject5 = new Subject("App Development");
