@@ -12,7 +12,6 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "studentId")
     private Long id;
     @NotEmpty
     private String firstName;
@@ -21,11 +20,21 @@ public class Student {
     @NotEmpty
     private String email;
     private String phoneNumber;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @ManyToMany()
+    @JoinTable(
+            name = "subjects",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_subjectId"))
     private List <Subject> subjects = new ArrayList<>();
 
     public Student() {
     }
+
+    public void addSubject(Subject subject){
+        subjects.add(subject);
+        subject.getStudent().add(this);
+    }
+
 
     public Student(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
@@ -34,10 +43,6 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public void addSubject(Subject subject){
-        subjects.add(subject);
-        subject.setStudent(this);
-    }
     @JsonbTransient
     public List<Subject> getSubjects() {
         return subjects;

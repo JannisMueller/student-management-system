@@ -3,6 +3,7 @@ package se.iths.entity;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 
 @NamedQuery(name="subjectEntity.findByName", query= "SELECT i FROM Subject i WHERE i.nameOfSubject = :name")
@@ -18,9 +19,8 @@ public class Subject {
     private String nameOfSubject;
     @ManyToOne
     private Teacher teacher;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentId")
-    private Student student;
+    @ManyToMany(mappedBy = "subjects" )
+    private List <Student> students = new ArrayList<>();
     //To-do bis jetzt wird immer nur ein Student geholt, will aber eine Liste mit Studenten
 
     public Subject() {
@@ -31,16 +31,13 @@ public class Subject {
         this.nameOfSubject = nameOfSubject;
     }
 
-    //@JsonbTransient
-    public Student getStudent() {
-        return student;
-    }
-    //@JsonbTransient
-    public void setStudent(Student student) {
-        this.student = student;
+    public List<Student> getStudent() {
+        return students;
     }
 
-
+    public void setStudent(List<Student> student) {
+        this.students = student;
+    }
 
     public Teacher getTeacher() {
         return teacher;
@@ -64,5 +61,17 @@ public class Subject {
 
     public void setNameOfSubject(String nameOfSubject) {
         this.nameOfSubject = nameOfSubject;
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Subject )) return false;
+        return subjectId != null && subjectId.equals(((Subject) obj).getSubjectId());
     }
 }
