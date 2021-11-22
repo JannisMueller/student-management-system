@@ -35,9 +35,21 @@ public class SampleDataGenerator {
                 "0123864");
 
         Student student2 = new Student("Valter",
-                "Berggren",
+                "Filipsson",
                 "valter@hotmail.com",
                 "098761256");
+
+        Student student3 = new Student("Lisa",
+                "Mueller",
+                "Lisa@hotmail.com",
+                "2334556");
+
+        Student student4 = new Student("Albert",
+                "Andersson",
+                "albert@gmail.com",
+                "2334556");
+
+
 
         Subject subject1 = new Subject("Java 1");
         Subject subject2 = new Subject("Database 2");
@@ -64,9 +76,16 @@ public class SampleDataGenerator {
         student2.addSubject(subject1);
         student2.addSubject(subject2);
         student2.addSubject(subject3);
-        student2.addSubject(subject4);
-        student2.addSubject(subject5);
         student2.addSubject(subject6);
+
+        student3.addSubject(subject4);
+        student3.addSubject(subject5);
+        student3.addSubject(subject1);
+
+        student4.addSubject(subject2);
+        student4.addSubject(subject6);
+        student4.addSubject(subject1);
+
 
         entityManager.persist(teacher1);
         entityManager.persist(teacher2);
