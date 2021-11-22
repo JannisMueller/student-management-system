@@ -2,77 +2,36 @@
 
 
 
-- [x] ● CRUD-funktionalitet ska implementeras (Create, Read, Update, Delete) 
+- [x] ● Utgå från det projekt ni har skapat under Labb 1.
 
-- [x] ● Data om en student ska kunna hämtas med efternamn som en Query Parameter
+- [x] ● Lägg till två entiteter, Subject (ämne) och Teacher (lärare).
 
-- [x] ● När en ny student ska läggas till, är alla fält obligatoriska utom telefonnummer
+- [x] ● En student ska kunna ha flera ämnen
 
-- [x] ● Anropen ska returnera meningsfulla Response Codes
+- [x] ● Ett ämne har flera studenter och en lärare.
 
-- [x] ● Skapa minst en egen exception
+- [x] ● En lärare ska kunna ha flera ämnen.
 
-- [x] ● Felhantering ska finnas för varje CRUD-metod, och felmeddelande ska returneras i
+- [x] ● Det ska finnas möjlighet att via en endpoint få fullständig information om ett ämne
+  (det vill säga en lista på deltagande studenter, samt vem som är lärare).
 
-​	JSON-format **Kommentar: felhantering för Delete och Put görs i studentservice metoden**
 
 
 
 **Endpoints**
+Data laddas in via en SampleDataGenerator
 
 ```
-GET
+GET 
 
-all:
-/student-management-system/api/v1/students
+get all subjects:
+/student-management-system/api/v1/subjects
 
-by ID:
-/student-management-system/api/v1/students/{id}
- QueryParameter = id;
+get all subjects ordered (by name):
+/student-management-system/api/v1/subjects/ordered
 
-by last name:
-/student-management-system/api/v1/students/lastname
-
-QueryParameter = lastName;
-exempel: http://localhost:8080/student-management-system/api/v1/students/lastname?		lastName=Mueller
-```
-
-```
-POST
-
-/student-management-system/api/v1/students
- 
-JSON-body:
-  { 
-	"firstName": "Jannis",
-	"lastName" : "Mueller",
-	"email": "jannis@test.se",
-	"phoneNumber": "01234567"
-}
-```
-
-```
-PUT
-
-/student-management-system/api/v1/students/{id}
-
-QueryParameter = id;
-
-JSON-body:
-{ 
-  "id": 1,
-	"firstName": "Jannis",
-	"lastName" : "Mueller",
-	"email": "jannis@test.se",
-	"phoneNumber": "01234567"
-}
-```
-
-```
-DELETE
-/student-management-system/api/v1/students/{id}
-
-QueryParameter = id;
+get subject by name
+/student-management-system/api/v1/s ubjects/getByName/{name}
 
 ```
 

@@ -68,8 +68,6 @@ public class SampleDataGenerator {
         student2.addSubject(subject5);
         student2.addSubject(subject6);
 
-
-
         entityManager.persist(teacher1);
         entityManager.persist(teacher2);
 

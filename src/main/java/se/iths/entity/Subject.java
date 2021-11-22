@@ -19,7 +19,7 @@ public class Subject {
     private String nameOfSubject;
     @ManyToOne
     private Teacher teacher;
-    @ManyToMany(mappedBy = "subjects" )
+    @ManyToMany(mappedBy = "subjects" , cascade = CascadeType.ALL)
     private List <Student> students = new ArrayList<>();
     //To-do bis jetzt wird immer nur ein Student geholt, will aber eine Liste mit Studenten
 
@@ -31,7 +31,7 @@ public class Subject {
         this.nameOfSubject = nameOfSubject;
     }
 
-    public List<Student> getStudent() {
+    public List<Student> getStudents() {
         return students;
     }
 

@@ -32,7 +32,7 @@ public class Student {
 
     public void addSubject(Subject subject){
         subjects.add(subject);
-        subject.getStudent().add(this);
+        subject.getStudents().add(this);
     }
 
 
