@@ -34,5 +34,8 @@ get all subjects ordered (by name):
 get subject by name
 /student-management-system/api/v1/subjects/getByName/{name}
 
+till exempel:
+http://localhost:8080/student-management-system/api/v1/subjects/getByName/Java1
+
 ```
 
