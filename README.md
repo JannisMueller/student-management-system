@@ -1,4 +1,4 @@
-# JAVA EE / JAX-RS - Labb
+# Labb 2 - JAVA EE
 
 
 
