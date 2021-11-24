@@ -19,6 +19,7 @@
 
 
 **Endpoints**
+
 Data laddas in via en SampleDataGenerator
 
 ```
